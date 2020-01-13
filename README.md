@@ -1,2 +1,3 @@
 # nuber-server
-Server for (N)Uber Clone
+
+Server for (N)Uber Clone. GraphQL, Typescript, NodeJS
