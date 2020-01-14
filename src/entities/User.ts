@@ -64,11 +64,14 @@ class User extends BaseEntity {
   lastOrientation: number;
 
   @CreateDateColumn() createdAt: string;
-
   @UpdateDateColumn() updatedAt: string;
 
   get fullName(): string {
     return `${this.firstName} ${this.lastName}`;
+  }
+
+  public comparePassword(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password);
   }
 
   @BeforeInsert()
