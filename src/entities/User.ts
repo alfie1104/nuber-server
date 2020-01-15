@@ -7,9 +7,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
+import Chat from "./Chat";
+import Message from "./Message";
+import Verification from "./Verification";
 
 const BCRYPT_ROUNDS = 10; // 몇번을 암호화 할지 설정
 
@@ -63,7 +68,26 @@ class User extends BaseEntity {
   @Column({ type: "double precision", default: 0 })
   lastOrientation: number;
 
+  @ManyToOne(
+    type => Chat,
+    chat => chat.participants
+  )
+  chat: Chat;
+
+  @OneToMany(
+    type => Message,
+    message => message.user
+  )
+  messages: Message[];
+
+  @OneToMany(
+    type => Verification,
+    verification => verification.user
+  )
+  verifications: Verification[];
+
   @CreateDateColumn() createdAt: string;
+
   @UpdateDateColumn() updatedAt: string;
 
   get fullName(): string {

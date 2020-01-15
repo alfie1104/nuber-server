@@ -6,6 +6,7 @@
   "author": "peter_alfie <alfie1104@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "class-validator": "^0.11.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -33,6 +34,7 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
+    "predev" : "yarn run types",
     "dev": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
     "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts"
