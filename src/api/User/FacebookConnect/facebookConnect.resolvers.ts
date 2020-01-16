@@ -1,9 +1,9 @@
-import User from "src/entities/User";
+import User from "../../../entities/User";
 import {
   FacebookConnectMutationArgs,
   FacebookConnectResponse
-} from "src/types/graph";
-import { Resolvers } from "src/types/resolver";
+} from "../../../types/graph";
+import { Resolvers } from "../../../types/resolver";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -19,7 +19,7 @@ const resolvers: Resolvers = {
           return {
             ok: true,
             error: null,
-            token: "Coming soon"
+            token: "Coming soon, already"
           };
         }
       } catch (error) {
@@ -29,8 +29,18 @@ const resolvers: Resolvers = {
           token: null
         };
       }
-      /*
+
       try {
+        await User.create({
+          ...args,
+          profilePhoto: `https://graph.facebook.com/${fbId}/picture?type=square`
+        }).save();
+
+        return {
+          ok: true,
+          error: null,
+          token: "Coming soon, created"
+        };
       } catch (error) {
         return {
           ok: false,
@@ -38,13 +48,6 @@ const resolvers: Resolvers = {
           token: null
         };
       }
-      */
-
-      return {
-        ok: false,
-        error: null,
-        token: null
-      };
     }
   }
 };
