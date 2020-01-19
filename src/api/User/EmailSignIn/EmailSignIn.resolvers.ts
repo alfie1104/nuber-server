@@ -22,11 +22,21 @@ const resolvers: Resolvers = {
           };
         }
 
-        return {
-          ok: false,
-          error: "No User with that email",
-          token: null
-        };
+        const checkPassword = await user.comparePassword(password);
+
+        if (checkPassword) {
+          return {
+            ok: true,
+            error: null,
+            token: "Coming soon"
+          };
+        } else {
+          return {
+            ok: false,
+            error: "Wrong password",
+            token: null
+          };
+        }
       } catch (error) {
         return {
           ok: false,
