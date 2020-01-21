@@ -4,6 +4,7 @@ import {
   FacebookConnectResponse
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolver";
+import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -16,10 +17,12 @@ const resolvers: Resolvers = {
         // fbId에 해당하는 유저가 있을 경우 해당 유저에 대한 토큰 반환
         const existingUser = await User.findOne({ fbId });
         if (existingUser) {
+          const token = createJWT(existingUser.id);
+
           return {
             ok: true,
             error: null,
-            token: "Coming soon, already"
+            token
           };
         }
       } catch (error) {
@@ -31,15 +34,17 @@ const resolvers: Resolvers = {
       }
 
       try {
-        await User.create({
+        const newUser = await User.create({
           ...args,
           profilePhoto: `https://graph.facebook.com/${fbId}/picture?type=square`
         }).save();
 
+        const token = createJWT(newUser.id);
+
         return {
           ok: true,
           error: null,
-          token: "Coming soon, created"
+          token
         };
       } catch (error) {
         return {
