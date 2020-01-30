@@ -24,9 +24,9 @@ Server for (N)Uber Clone. GraphQL, Typescript, NodeJS
 ### Private Resolvers:
 
 - [x] Get my Profile
-- [ ] Request Email Verification
-- [ ] Complete Email Verification
-- [ ] Update my Profile
+- [x] Request Email Verification
+- [x] Complete Email Verification
+- [x] Update my Profile
 - [ ] Toggle Driving Mode
 - [ ] Report location / orientation
 - [ ] Add Place
