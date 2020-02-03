@@ -14,6 +14,7 @@ import {
 } from "typeorm";
 import Chat from "./Chat";
 import Message from "./Message";
+import Place from "./Place";
 import Ride from "./Ride";
 
 const BCRYPT_ROUNDS = 10; // 몇번을 암호화 할지 설정
@@ -94,6 +95,12 @@ class User extends BaseEntity {
     ride => ride.driver
   )
   ridesAsDriver: Ride[];
+
+  @OneToMany(
+    type => Place,
+    place => place.user
+  )
+  places: Place[];
 
   @CreateDateColumn() createdAt: string;
 
