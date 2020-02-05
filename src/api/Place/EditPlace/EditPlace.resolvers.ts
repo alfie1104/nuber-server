@@ -19,14 +19,10 @@ const resolvers: Resolvers = {
 
           if (place) {
             if (place.userId === user.id) {
-              console.log("123123");
-
               const notNull: any = cleanNullArgs(args);
               delete notNull.placeId;
 
               await Place.update({ id: args.placeId }, { ...notNull });
-
-              console.log("xcadfafsd");
 
               return {
                 ok: true,
