@@ -12,7 +12,7 @@ class App {
 
   constructor() {
     this.pubSub = new PubSub();
-    this.pubSub.ee.setMaxListeners(99);
+    this.pubSub.ee.setMaxListeners(99); // 이렇게 안하면 pubSub사용 시, 메모리 누수가 발생함
     this.app = new GraphQLServer({
       schema,
       context: req => {
