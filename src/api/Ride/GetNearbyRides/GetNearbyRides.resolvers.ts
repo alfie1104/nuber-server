@@ -14,7 +14,7 @@ const resolvers: Resolvers = {
           const { lastLat, lastLng } = user;
 
           try {
-            const ride = await getRepository(Ride).findOne({
+            const ride: any = await getRepository(Ride).findOne({
               status: "REQUESTING",
               pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
               pickUpLng: Between(lastLng - 0.05, lastLng + 0.05)
