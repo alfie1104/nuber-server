@@ -35,10 +35,12 @@ const resolvers: Resolvers = {
                 user.save();
 
                 // user(driver)가 RideRequest를 ACCEPT할때 user(driver)와 passenger가 있는 chat도 생성
-                await Chat.create({
+                const chat = await Chat.create({
                   driver: user,
                   passenger: ride.passenger
                 }).save();
+                ride.chat = chat;
+                ride.save();
               }
             } else {
               ride = await Ride.findOne({
