@@ -3,7 +3,7 @@ import Ride from "../../../entities/Ride";
 import User from "../../../entities/User";
 import {
   UpdateRideStatusMutationArgs,
-  UpdateRideStatusResponse
+  UpdateRideStatusResponse,
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolver";
 import privateResolver from "../../../utils/privateResolver";
@@ -25,7 +25,7 @@ const resolvers: Resolvers = {
               ride = await Ride.findOne(
                 {
                   id: args.rideId,
-                  status: "REQUESTING"
+                  status: "REQUESTING",
                 },
                 { relations: ["passenger"] }
               );
@@ -37,7 +37,7 @@ const resolvers: Resolvers = {
                 // user(driver)가 RideRequest를 ACCEPT할때 user(driver)와 passenger가 있는 chat도 생성
                 const chat = await Chat.create({
                   driver: user,
-                  passenger: ride.passenger
+                  passenger: ride.passenger,
                 }).save();
                 ride.chat = chat;
                 ride.save();
@@ -45,7 +45,7 @@ const resolvers: Resolvers = {
             } else {
               ride = await Ride.findOne({
                 id: args.rideId,
-                driver: user
+                driver: user,
               });
             }
 
@@ -56,29 +56,33 @@ const resolvers: Resolvers = {
 
               return {
                 ok: true,
-                error: null
+                error: null,
+                rideId: ride.id,
               };
             } else {
               return {
                 ok: false,
-                error: "Can't update ride"
+                error: "Can't update ride",
+                rideId: null,
               };
             }
           } catch (error) {
             return {
               ok: false,
-              error: error.message
+              error: error.message,
+              rideId: null,
             };
           }
         } else {
           return {
             ok: false,
-            error: "You are not driving"
+            error: "You are not driving",
+            rideId: null,
           };
         }
       }
-    )
-  }
+    ),
+  },
 };
 
 export default resolvers;
