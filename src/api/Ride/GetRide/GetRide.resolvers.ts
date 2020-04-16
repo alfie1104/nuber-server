@@ -11,40 +11,43 @@ const resolvers: Resolvers = {
         const user: User = req.user;
 
         try {
-          const ride = await Ride.findOne({
-            id: args.rideId
-          });
+          const ride = await Ride.findOne(
+            {
+              id: args.rideId,
+            },
+            { relations: ["passenger", "driver"] }
+          );
           if (ride) {
             if (ride.passengerId === user.id || ride.driverId === user.id) {
               return {
                 ok: true,
                 error: null,
-                ride
+                ride,
               };
             } else {
               return {
                 ok: false,
                 error: "Not Authorized",
-                ride: null
+                ride: null,
               };
             }
           } else {
             return {
               ok: false,
               error: "Ride not found",
-              ride: null
+              ride: null,
             };
           }
         } catch (error) {
           return {
             ok: false,
             error: error.message,
-            ride: null
+            ride: null,
           };
         }
       }
-    )
-  }
+    ),
+  },
 };
 
 export default resolvers;
