@@ -6,7 +6,7 @@
   "author": "peter_alfie <alfie1104@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "class-validator": "^0.11.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
