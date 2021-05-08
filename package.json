@@ -19,7 +19,7 @@
     "morgan": "^1.9.1",
     "pg": "^7.17.1",
     "twilio": "^3.39.2",
-    "typeorm": "^0.2.22"
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
